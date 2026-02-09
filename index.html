@@ -33,3 +33,146 @@
             margin-top: 30px;
             display: flex;
             justify-content: center;
+            g<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be My Valentine?</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #fff0f3;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            background: white;
+            padding: 40px;
+            border-radius: 30px;
+            box-shadow: 0 15px 35px rgba(255, 77, 109, 0.2);
+            z-index: 10;
+            width: 350px;
+        }
+
+        h1 { color: #ff4d6d; margin-bottom: 10px; }
+        p { color: #ff8fa3; font-weight: bold; min-height: 1.5em; }
+
+        .buttons {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+ap: 15px;
+        }
+
+        button {
+            padding: 12px 25px;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: transform 0.1s ease;
+        }
+
+        #yesBtn { background-color: #ff4d6d; color: white; }
+        #yesBtn:hover { transform: scale(1.1); }
+
+        #noBtn {
+            background-color: #594d5b;
+            color: white;
+            position: relative;
+            z-index: 100;
+        }
+
+        .heart {
+            position: absolute;
+            color: #ffccd5;
+            animation: float 5s linear infinite;
+            z-index: 1;
+            user-select: none;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(110vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div id="content">
+            <h1>SORRY NA, BATI NA US🙏🤗</h1>
+            <p id="message">Choose wisely...</p>
+            <div class="buttons">
+                <button id="yesBtn" onclick="celebrate()">OKAY</button>
+                <button id="noBtn" onclick="moveButton()">AYAW</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const messages = [
+            "Baka mapindot hahaha",
+            "Bagal hahaha!",
+            "lala!",
+            "Hmmm😑",
+            "Dali na!",
+            "Yes mo nalang kase😏"
+        ];
+
+        function moveButton() {
+            const btn = document.getElementById('noBtn');
+            const msg = document.getElementById('message');
+            
+            // Generate random coordinates
+            // We subtract 100 to keep the button from going off-edge
+            const x = Math.random() * (window.innerWidth - 100);
+            const y = Math.random() * (window.innerHeight - 50);
+            
+            // Set fixed/absolute position and move it
+            btn.style.position = 'fixed';
+            btn.style.left = x + 'px';
+            btn.style.top = y + 'px';
+
+            // Change the message randomly
+            const randomMsg = messages[Math.floor(Math.random() * messages.length)];
+            msg.innerText = randomMsg;
+        }
+
+        function celebrate() {
+            const content = document.getElementById('content');
+            content.innerHTML = `
+                <h1 style="font-size: 3rem;">YAY! 🥰</h1>
+                <p>I LOVE YOU!</p>
+                <p style="font-size: 40px;">💕😍💕</p>
+            `;
+            // Make more hearts appear when she says yes
+            for(let i=0; i<20; i++) {
+                setTimeout(createHeart, i * 100);
+            }
+        }
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.fontSize = (Math.random() * 20 + 20) + 'px';
+            heart.style.animationDuration = (Math.random() * 2 + 3) + 's';
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 5000);
+        }
+
+        setInterval(createHeart, 400);
+    </script>
+</body>
+</html>
